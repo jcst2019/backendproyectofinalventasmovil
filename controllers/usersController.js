@@ -3,6 +3,7 @@ const Rol = require('../models/rol');
 const jwt = require('jsonwebtoken');
 const keys = require('../config/keys');
 const storage = require('../utils/cloud_storage');
+const { request } = require('express');
 
 module.exports = {
 
@@ -56,7 +57,7 @@ module.exports = {
             const files =req.files;
 
             if(files.length >0){
-                const pathImae = `image_${Date.now}`;// Nombre del archivo a almacenar
+                const pathImae = `image_${Date.now()}`;// Nombre del archivo a almacenar
                 const url = await storage(files[0],pathImae);
 
                 if(url != undefined && url != null){
@@ -80,6 +81,42 @@ module.exports = {
             return res.status(501).json({
                 success: false,
                 message: 'Hubo un error con el registro del usuario',
+                error: error
+            });
+        }
+    },
+
+    async update(req, res, next) {
+        try {
+            
+            const user = JSON.parse(req.body.user);
+
+            console.log(`Datos Enviados del usuario: ${ JSON.stringify(user)}`);
+
+            const files =req.files;
+
+            if(files.length >0){
+                const pathImae = `image_${Date.now()}`;// Nombre del archivo a almacenar
+                const url = await storage(files[0],pathImae);
+
+                if(url != undefined && url != null){
+                    user.image =url;
+                }
+            }
+
+            await User.update(user);
+            
+            return res.status(201).json({
+                success: true,
+                message: 'Los datos del usuario se actualizaron correctamente'
+            });
+
+        } 
+        catch (error) {
+            console.log(`Error: ${error}`);
+            return res.status(501).json({
+                success: false,
+                message: 'Hubo un error con la actualización de datos del usuario',
                 error: error
             });
         }
@@ -137,8 +174,22 @@ module.exports = {
                 error: error
             });
         }
+    },
+
+    async findById(req, res, next) {
+        try {
+            const id = req.params.id;
+
+            const data = await User.findByUserId(id);    
+            console.log(`Usuario: ${data}`);
+            return res.status(201).json(data);
+        } 
+        catch (error) {
+            console.log(`Error: ${error}`);
+            return res.status(501).json({
+                success: false,
+                message: 'Error al obtener el usuario por ID'
+            });
+        }
     }
-
-
-
 };
