@@ -163,6 +163,23 @@ User.update =(user)=>{
 
 }
 
+User.updateToken =(id,token)=>{
+
+    const sql = `
+    UPDATE 
+          users
+    SET
+          session_token = $2
+    WHERE
+          id = $1
+    `;  
+    return db.none(sql,[
+        id,
+        token
+    ]);
+
+}
+
 User.isPasswordMatched = (userPassword, hash) => {
     const myPasswordHashed = crypto.createHash('md5').update(userPassword).digest('hex');
     if (myPasswordHashed === hash) {

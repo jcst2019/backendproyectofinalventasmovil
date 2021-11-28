@@ -7,6 +7,7 @@ const cors = require('cors');
 const multer = require('multer');
 const admin = require('firebase-admin');
 const serviceAccount = require('./serviceAccountKey.json');
+const passsport = require('passport');
 
 /*
 Inicializar Firebase
@@ -22,6 +23,7 @@ const upload = multer({
 * RUTAS
 */
 const users = require('./routes/usersRoutes');
+const passport = require('passport');
 
 const port = process.env.PORT || 5000;
 
@@ -31,7 +33,14 @@ app.use(express.urlencoded({
     extended: true
 }));
 app.use(cors());
+/*
+Configuración para poder utilizar JWT
+*/
+app.use(passport.initialize());
+app.use(passport.session());
+require('./config/passport')(passport);
 
+//---------------------------
 app.disable('x-powered-by');
 
 app.set('port', port);
