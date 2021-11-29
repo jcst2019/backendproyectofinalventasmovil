@@ -43,13 +43,12 @@ const databaseConfig = {
   };*/
 
   const databaseConfig = {
-    use_env_variable: 'DATABASE_URL',
-    dialect: 'postgresql',
-    ssl: true,
-    dialectOptions: {
-      ssl: { require: true },
+    client: 'pg',
+    connection: process.env.DATABASE_URL + `?ssl=true`,
+    migrations: {
+      directory: './db/migrations'
     },
-    logging: false,
+    useNullAsDefault: true
   };
 
 const db = pgp(databaseConfig);
