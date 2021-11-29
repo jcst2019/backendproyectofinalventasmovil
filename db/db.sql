@@ -37,3 +37,16 @@ CREATE TABLE user_has_roles(
     foreign key (id_rol) REFERENCES roles(id) on update CASCADE ON DELETE CASCADE,
     primary key (id_user,id_rol)
 );
+
+DROP TABLE IF EXISTS categories CASCADE;
+CREATE TABLE categories(
+	id BIGSERIAL NOT NULL ,
+    name VARCHAR(180) NOT NULL ,
+    description(255) NOT NULL,
+	created_at TIMESTAMP(0) NOT NULL,
+	updated_at TIMESTAMP(0) NOT NULL,
+    primary key (id)
+);
+
+
+

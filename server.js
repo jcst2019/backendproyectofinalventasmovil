@@ -50,7 +50,14 @@ app.set('port', port);
 */
 users(app, upload);
 
-server.listen(5000, '192.168.0.103' || 'localhost', function() {
+/*
+Configurar para Producción con Heroku
+*/
+//server.listen(5000, '192.168.0.103' || 'localhost', function() {
+//    console.log('Aplicacion de NodeJS ' + port + ' Iniciada...')
+//});
+
+server.listen(process.env.PORT || 5000, '192.168.0.103' || 'localhost' || 'https://app-precotexventa-backend.herokuapp.com/', function() {
     console.log('Aplicacion de NodeJS ' + port + ' Iniciada...')
 });
 
