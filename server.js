@@ -57,7 +57,7 @@ Configurar para Producción con Heroku
 //    console.log('Aplicacion de NodeJS ' + port + ' Iniciada...')
 //});
 
-server.listen(process.env.PORT || 5000, '192.168.0.103' || 'localhost' || 'https://app-precotexventa-backend.herokuapp.com/', function() {
+server.listen(process.env.PORT || 5000, function() {
     console.log('Aplicacion de NodeJS ' + port + ' Iniciada...')
 });
 
