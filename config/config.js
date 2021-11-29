@@ -19,7 +19,7 @@ const databaseConfig = {
     'password': 'admin'
 };
 */
-
+/* Esta configuración no funcionó para despliegue con Heroku
 const databaseConfig = {
     'host': 'ec2-23-23-219-25.compute-1.amazonaws.com',
     'port': 5432,
@@ -27,6 +27,19 @@ const databaseConfig = {
     'user': 'cgxzwxtrkhrdci',
     'password': '62829a000df0c0b2b80812e80cec9953b4b64cbae11380e190207255e4d8686f'
 };
+*/
+const databaseConfig = {
+    username: process.env.DB_USERNAME,
+    database: process.env.DB_DATABASE,
+    password: process.env.DB_PASSWORD,
+    host: process.env.DB_HOSTNAME,
+    port: 5432,
+    ssl: true,
+    dialect: 'postgres',
+    dialectOptions: {
+      "ssl": {"require":true }
+    }
+  };
 
 const db = pgp(databaseConfig);
 
