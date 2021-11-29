@@ -8,6 +8,7 @@ const multer = require('multer');
 const admin = require('firebase-admin');
 const serviceAccount = require('./serviceAccountKey.json');
 const passsport = require('passport');
+const sslRedirect = require('heroku-ssl-redirect').default
 
 /*
 Inicializar Firebase
