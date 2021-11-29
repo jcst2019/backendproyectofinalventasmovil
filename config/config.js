@@ -42,6 +42,17 @@ const databaseConfig = {
     }
   };*/
 
+  
+const {
+    Pool
+  } = require('pg');
+
+  const db = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: true
+
+});
+ /*   
   const databaseConfig = {
     client: 'pg',
     connection: process.env.DATABASE_URL + `?ssl=true`,
@@ -49,8 +60,8 @@ const databaseConfig = {
       directory: './db/migrations'
     },
     useNullAsDefault: true
-  };
-
-const db = pgp(databaseConfig);
+    
+    const db = pgp(databaseConfig);
+  };*/
 
 module.exports = db;
