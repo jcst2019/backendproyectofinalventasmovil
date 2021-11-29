@@ -41,17 +41,6 @@ const databaseConfig = {
       "ssl": {"require":true }
     }
   };*/
-
-  
-const {
-    Pool
-  } = require('pg');
-
-  const db = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: true
-
-});
  /*   
   const databaseConfig = {
     client: 'pg',
@@ -63,5 +52,11 @@ const {
     
     const db = pgp(databaseConfig);
   };*/
+const databaseConfig = {
+    connectionString: process.env.DATABASE_URL,
+    ssl: true
 
+};
+
+const db = pgp(databaseConfig);
 module.exports = db;
