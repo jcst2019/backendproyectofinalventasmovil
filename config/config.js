@@ -28,6 +28,7 @@ const databaseConfig = {
     'password': '62829a000df0c0b2b80812e80cec9953b4b64cbae11380e190207255e4d8686f'
 };
 */
+/*Esta configuración no funcionó para despliegue con Heroku
 const databaseConfig = {
     username: process.env.DB_USERNAME,
     database: process.env.DB_DATABASE,
@@ -39,6 +40,16 @@ const databaseConfig = {
     dialectOptions: {
       "ssl": {"require":true }
     }
+  };*/
+
+  const databaseConfig = {
+    use_env_variable: 'DATABASE_URL',
+    dialect: 'postgresql',
+    ssl: true,
+    dialectOptions: {
+      ssl: { require: true },
+    },
+    logging: false,
   };
 
 const db = pgp(databaseConfig);
