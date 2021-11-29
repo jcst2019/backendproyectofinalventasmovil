@@ -54,8 +54,7 @@ const databaseConfig = {
   };*/
 const databaseConfig = {
     connectionString: process.env.DATABASE_URL,
-    ssl: true
-
+    ssl: { rejectUnauthorized: false }
 };
 
 const db = pgp(databaseConfig);
